@@ -59,7 +59,7 @@ if __name__ == "__main__":
     print("start to load models>>>>>>>>>>>>>>>>>>>>>>>>")
     # mask proposal module
     model = get_model(args.MPM_checkpoint)
-    model = torch.nn.DataParallel(model)
+    # model = torch.nn.DataParallel(model)
     model.eval()
     model.to(device) 
     odise_model = load_2d_model(args.vocab)
