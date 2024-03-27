@@ -14,7 +14,7 @@ import sys
 sys.path.append("./ODISE")
 from openins3d.utils import save_visulization_3d, generate_detection_results
 from openins3d.mask3d import get_model, load_mesh, prepare_data, map_output_to_pointcloud, save_colorized_mesh, prepare_data_pcd
-import torch
+
 
 
 
@@ -59,6 +59,7 @@ if __name__ == "__main__":
     print("start to load models>>>>>>>>>>>>>>>>>>>>>>>>")
     # mask proposal module
     model = get_model(args.MPM_checkpoint)
+    model = torch.nn.DataParallel(model)
     model.eval()
     model.to(device) 
     odise_model = load_2d_model(args.vocab)
