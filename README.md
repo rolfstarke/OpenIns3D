@@ -19,6 +19,10 @@
   <div align="center"></div>
 </p>
 
+   
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/openins3d-snap-and-lookup-for-3d-open/zero-shot-3d-point-cloud-classification-on-1)](https://paperswithcode.com/sota/zero-shot-3d-point-cloud-classification-on-1?p=openins3d-snap-and-lookup-for-3d-open) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/openins3d-snap-and-lookup-for-3d-open/3d-open-vocabulary-instance-segmentation-on-3)](https://paperswithcode.com/sota/3d-open-vocabulary-instance-segmentation-on-3?p=openins3d-snap-and-lookup-for-3d-open)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/openins3d-snap-and-lookup-for-3d-open/3d-open-vocabulary-object-detection-on-1)](https://paperswithcode.com/sota/3d-open-vocabulary-object-detection-on-1?p=openins3d-snap-and-lookup-for-3d-open)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/openins3d-snap-and-lookup-for-3d-open/3d-open-vocabulary-instance-segmentation-on-1)](https://paperswithcode.com/sota/3d-open-vocabulary-instance-segmentation-on-1?p=openins3d-snap-and-lookup-for-3d-open)
 <p align="center">
 <strong> TL;DR: OpenIns3D proposes a "mask-snap-lookup" scheme to achieve 2D-input-free 3D open-world scene understanding, which attains SOTA performance across datasets, even with fewer input prerequisites. 🚀✨
 </p>
@@ -113,7 +117,7 @@ cd ODISE
 pip install -e .
 cd ..
 
-pip install torch_scatter gdown loguru open3d plyfile pyviz3d python-dotenv omegaconf==2.1.1 iopath==0.1.8
+pip install torch_scatter gdown==v4.6.3 loguru open3d plyfile pyviz3d python-dotenv omegaconf==2.1.1 iopath==0.1.8
 ```
 
 
@@ -129,8 +133,11 @@ To achieve zero-shot scene understanding with **OpenIns3D**, follow these two st
 We provide several sample datasets from `Replica`, `Mattarport3d`, and `S3DIS`, `Scannet` for quick testing. Run the following code to download demo data
 
 ```bash
+pip install gdown==v4.6.3
 cd demo; python download_demo_scenes.py
 ```
+
+(If you are experiencing issues downloading the demo scene files, please ensure that you have the correct version of gdown)
 
 Example of testing:
  
