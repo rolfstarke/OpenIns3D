@@ -150,7 +150,7 @@ python zero_shot.py \
 
 # scannet demo
 python zero_shot.py \
---pcd_path 'demo/demo_scene/scannet_scene1.ply' \
+--pcd_path 'demo/demo_scene/scannet/scannet_scene1.ply' \
 --vocab "cabinet; bed; chair; sofa; table; door; window; bookshelf; picture; counter; desk; curtain; refrigerator; showercurtain; toilet; sink; bathtub" \
 --dataset scannet
 
