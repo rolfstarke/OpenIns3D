@@ -1,7 +1,7 @@
 import subprocess
 
 # Define common parameters
-vocab = "chair; window; ceiling; picture; floor; lighting; table; cabinet; curtain; plant; shelving; sink; mirror; stairs; counter; stool; bed; sofa; shower; toilet; TV; clothes; bathtub; blinds; board"
+vocab = "floor"
 dataset = "mattarport3d"
 
 # Loop through the scene files
