@@ -44,7 +44,8 @@ if __name__ == "__main__":
 
     scene_id = os.path.basename(args.pcd_path).split(".")[0]
     height, width = args.img_size[0], args.img_size[1] 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cpu")
     snap_save_path = f"{args.byproduct_save}/snap/"
     lookup_save_path = f"{args.byproduct_save}/Lookup_dict/"
     result_save_path_2d = f"{args.byproduct_save}/result_vis_2d/"
