@@ -31,7 +31,7 @@ for plyfile in os.listdir('data/input/'):
         parser.add_argument('--MPM_checkpoint', default="checkpoints/scannet200_val.ckpt", type=str, help='the path of MPM_checkpoint')
         parser.add_argument('--vocab', default="cabinet; bed; chair; sofa; table; door; window; bookshelf; picture; counter; desk; curtain; refrigerator; showercurtain; toilet; sink; bathtub", help= "simliar to ODISE, this is in format 'a1,a2;b1,b2', where a1,a2 are synonyms vocabularies for the first class")
         parser.add_argument('--result_save', default="data/results", type=str, help='Where to save the pcd results')
-        parser.add_argument('--dataset', default="scannet", type=str, help='where to save the pcd results')
+        parser.add_argument('--dataset', default="matterport3d", type=str, help='where to save the pcd results')
         parser.add_argument('--byproduct_save', default = "data/results", type=str, help='Where to save the byproduct, including snap images, masks, and lookup_dict')
         args = parser.parse_args()
         return args
