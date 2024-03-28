@@ -69,7 +69,7 @@ for plyfile in os.listdir('data/input/'):
 
         # snap module
         print("snap:")
-        pointcloud_file = plyfile
+        pointcloud_file = f"data/input/{plyfile}"
         print(pointcloud_file)
         if args.dataset in ["scannet"]:
             adjust_camera = [5, 0.1, 0.3]
