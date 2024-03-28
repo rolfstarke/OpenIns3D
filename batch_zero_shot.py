@@ -46,11 +46,11 @@ for plyfile in os.listdir('data/input/'):
         scene_id = os.path.splitext(plyfile)[0]
         height, width = args.img_size[0], args.img_size[1] 
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        snap_save_path = f"{args.byproduct_save}/{timestamp}_{plyfile}/snap/"
-        lookup_save_path = f"{args.byproduct_save}/{timestamp}_{plyfile}/Lookup_dict/"
-        result_save_path_2d = f"{args.byproduct_save}/{timestamp}_{plyfile}/result_vis_2d/"
-        result_save_path_3d = f"{args.byproduct_save}/{timestamp}_{plyfile}/result_vis_3d/"
-        result_mask_save_path = f"{args.result_save}/{timestamp}_{plyfile}/"
+        snap_save_path = f"{args.byproduct_save}/{timestamp}_{scene_id}/snap/"
+        lookup_save_path = f"{args.byproduct_save}/{timestamp}_{scene_id}/Lookup_dict/"
+        result_save_path_2d = f"{args.byproduct_save}/{timestamp}_{scene_id}/result_vis_2d/"
+        result_save_path_3d = f"{args.byproduct_save}/{timestamp}_{scene_id}/result_vis_3d/"
+        result_mask_save_path = f"{args.result_save}/{timestamp}_{scene_id}/"
         string_list = args.vocab.split(';')
 
         CLASS_LABELS = [s.strip() for s in string_list]
