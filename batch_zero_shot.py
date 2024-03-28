@@ -71,57 +71,31 @@ for plyfile in os.listdir('data/input/'):
         print("snap:")
         pointcloud_file = f"data/input/{plyfile}"
         print(pointcloud_file)
-        if args.dataset in ["scannet"]:
-            adjust_camera = [5, 0.1, 0.3]
-            image_generation_mesh(pointcloud_file, height, width, scene_id, snap_save_path, adjust_camera=adjust_camera)
-            pcd, _ = read_plymesh(pointcloud_file)
-            xyz, rgb = pcd[:,:3], pcd[:,3:6]
-            scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
-        elif args.dataset in ["replica"]:
-            adjust_camera = [5, 0.1, 0.3]
-            image_generation_mesh(pointcloud_file, height, width, scene_id, snap_save_path, adjust_camera=adjust_camera)
-            pcd, _ = read_plymesh(pointcloud_file)
-            xyz, rgb = pcd[:,:3], pcd[:,6:9]
-            scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
-        elif args.dataset == "mattarport3d":
-            # load mattarport3d as pcd
-            pcd, _ = read_plymesh(pointcloud_file)
-            xyz, rgb = pcd[:,:3], pcd[:,8:11]
-            scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
-            adjust_camera = [2, 0.1, 0.3]  
-            image_generation_pcd(scan_pc, height, width, scene_id, snap_save_path, adjust_camera=adjust_camera)
-        elif args.dataset == "s3dis":
-            # load s3dis as pcd
-            pcd = np.load(pointcloud_file)
-            xyz, rgb = pcd[:,:3], pcd[:,3:6]
-            scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
-            adjust_camera = [10, 2, 0.6]
-            image_generation_pcd(scan_pc, height, width, scene_id, snap_save_path, adjust_camera=adjust_camera)
+        scene_id1 = ""
+        # load mattarport3d as pcd
+        pcd, _ = read_plymesh(pointcloud_file)
+        xyz, rgb = pcd[:,:3], pcd[:,8:11]
+        scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
+        adjust_camera = [2, 0.1, 0.3]  
+        image_generation_pcd(scan_pc, height, width, scene_id1, snap_save_path, adjust_camera=adjust_camera)
+
         print("mask:")
         # mask module
-        if args.dataset in ["scannet", "replica", "mattarport3d"]:
-            mesh = load_mesh(pointcloud_file)
-            data, _, _, features, _, inverse_map = prepare_data(mesh, device)
-            with torch.no_grad():
-                outputs = model(data, raw_coordinates=features)
-            binary_mask = map_output_to_pointcloud(mesh, outputs, inverse_map, confidence_threshold = 0.8)
-        elif args.dataset =="s3dis":
-            pcd = np.load(pointcloud_file)
-            xyz, rgb = pcd[:,:3], pcd[:,3:6]
-            scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
-            data, _, _, features, _, inverse_map = prepare_data_pcd(xyz, rgb, device)
-            with torch.no_grad():
-                outputs = model(data, raw_coordinates=features)
-            binary_mask = map_output_to_pointcloud(scan_pc, outputs, inverse_map, confidence_threshold = 0.8)
+        mesh = load_mesh(pointcloud_file)
+        data, _, _, features, _, inverse_map = prepare_data(mesh, device)
+        with torch.no_grad():
+            outputs = model(data, raw_coordinates=features)
+        binary_mask = map_output_to_pointcloud(mesh, outputs, inverse_map, confidence_threshold = 0.8)
+
         print("build lookup dictionaries:")
         # build_lookup_dict
-        build_lookup_dict_one_scene(odise_model, scene_id, snap_save_path, lookup_save_path)
+        build_lookup_dict_one_scene(odise_model, scene_id1, snap_save_path, lookup_save_path)
         print("mask2pixel lookup:")
         # mask2pixel lookup
-        mask2pixel_lookup, _ = mask_classfication(binary_mask, scan_pc, adjust_camera, scene_id, height, width, snap_save_path, lookup_save_path, result_mask_save_path, CLASS_LABELS, VALID_CLASS_IDS)
+        mask2pixel_lookup, _ = mask_classfication(binary_mask, scan_pc, adjust_camera, scene_id1, height, width, snap_save_path, lookup_save_path, result_mask_save_path, CLASS_LABELS, VALID_CLASS_IDS)
 
         # save and visulizize the results
         detection_results, detected_label_id = generate_detection_results(mask2pixel_lookup, binary_mask, CLASS_LABELS, VALID_CLASS_IDS)
         # save results in image
-        save_results_2d(scan_pc, height, width, scene_id, result_save_path_2d, adjust_camera, detection_results)
+        save_results_2d(scan_pc, height, width, scene_id1, result_save_path_2d, adjust_camera, detection_results)
         save_visulization_3d(scan_pc.cpu().numpy(), args.vocab, binary_mask, detection_results[0], detected_label_id, scene_id, result_save_path_3d, save_ply = False)
