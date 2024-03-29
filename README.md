@@ -156,7 +156,7 @@ python zero_shot.py \
 
 # mattarport3d demo
 python zero_shot.py \
---pcd_path 'demo/demo_scene/mattarport3d/mp3d_scene1.ply' \
+--pcd_path 'data/input/room1_model.ply' \
 --vocab "chair; window; ceiling; picture; floor; lighting; table; cabinet; curtain; plant; shelving; sink; mirror; stairs;  counter; stool; bed; sofa; shower; toilet; TV; clothes; bathtub; blinds; board" \
 --dataset mattarport3d
 
