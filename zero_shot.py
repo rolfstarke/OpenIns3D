@@ -93,6 +93,7 @@ if __name__ == "__main__":
         pcd = np.load(pointcloud_file)
         xyz, rgb = pcd[:,:3], pcd[:,3:6]
         scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
+        print(scan_pc)
         adjust_camera = [10, 2, 0.6]
         image_generation_pcd(scan_pc, height, width, scene_id, snap_save_path, adjust_camera=adjust_camera)
     print("mask:")
