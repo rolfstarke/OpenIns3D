@@ -83,10 +83,9 @@ if __name__ == "__main__":
         scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
     elif args.dataset == "mattarport3d":
         # load mattarport3d as pcd
-        pcd, _ = read_plymesh(pointcloud_file)
+        pcd, _ = read_plymesh(pointcloud_file) # maybe print this pcd for a simple cloud
         xyz, rgb = pcd[:,:3], pcd[:,8:11]
-        #scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
-        scan_pc = torch.from_numpy(np.hstack([xyz, rgb])).float()  # Ensure conversion to Float
+        scan_pc = torch.from_numpy(np.hstack([xyz, rgb]))
         adjust_camera = [2, 0.1, 0.3]  
         image_generation_pcd(scan_pc, height, width, scene_id, snap_save_path, adjust_camera=adjust_camera)
     elif args.dataset == "s3dis":

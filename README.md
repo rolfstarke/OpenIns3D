@@ -168,8 +168,8 @@ python zero_shot.py \
 
 # cuosmtized data 
 python zero_shot.py \
---pcd_path 'path/to/your/own/3dscene' \
---vocab "vocabulary list to be used" \
+--pcd_path 'data/input/room1_model.ply' \
+--vocab "cabinet; bed; chair; sofa; table; door; window; bookshelf; picture; counter; desk; curtain; refrigerator; showercurtain; toilet; sink; bathtub" \
 ```
 
 The dataset flag is only for adjusting the loading for different .ply files. For customizing the dataset, use 'scanent' as the default. Let us know if you encounter any issues! 📣

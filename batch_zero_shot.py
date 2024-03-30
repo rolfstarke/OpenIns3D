@@ -9,8 +9,8 @@ base_command = [
     'python', 'zero_shot.py',
     '--byproduct_save', 'data/results/',
     '--result_save', 'data/results/',
-    '--vocab', 'chair; window; ceiling; picture; floor; lighting; table; cabinet; curtain; plant; shelving; sink; mirror; stairs; counter; stool; bed; sofa; shower; toilet; TV; clothes; bathtub; blinds; board',
-    '--dataset', 'mattarport3d'
+    '--vocab', 'chair; window; ceiling; floor; table; cabinet; curtain; stairs; board',
+    '--dataset', 'scannet'
 ]
 
 # Process .ply files
@@ -28,3 +28,7 @@ for plyfile in os.listdir(input_dir):
 print("Successfully processed files:")
 for file in successful_files:
     print(file)
+
+
+
+
