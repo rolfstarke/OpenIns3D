@@ -10,7 +10,7 @@ base_command = [
     '--byproduct_save', 'data/results/',
     '--result_save', 'data/results/',
     #'--vocab', 'chair; window; ceiling; wall, floor; table; cabinet; curtain; stairs; board',
-    '--vocab', 'extinguisher',
+    '--vocab', 'extinguisher,  wall',
     '--dataset', 'scannet'
 ]
 
