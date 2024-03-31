@@ -9,7 +9,8 @@ base_command = [
     'python', 'zero_shot.py',
     '--byproduct_save', 'data/results/',
     '--result_save', 'data/results/',
-    '--vocab', 'chair; window; ceiling; floor; table; cabinet; curtain; stairs; board',
+    #'--vocab', 'chair; window; ceiling; wall, floor; table; cabinet; curtain; stairs; board',
+    '--vocab', 'extinguisher',
     '--dataset', 'scannet'
 ]
 
