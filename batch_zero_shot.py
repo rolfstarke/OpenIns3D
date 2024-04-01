@@ -7,8 +7,8 @@ successful_files = []
 
 base_command = [
     'python', 'zero_shot.py',
-    '--byproduct_save', 'data/results/',
-    '--result_save', 'data/results/',
+    '--byproduct_save', 'data/results',
+    '--result_save', 'data/results',
     '--vocab', 'chair; window; ceiling; wall; floor; table; curtain; extinguisher; carpet',
     #'--vocab', 'extinguisher,  wall',
     '--dataset', 'scannet'
