@@ -20,7 +20,6 @@ folder_count = 1
 def create_command(vocab, pcd_path, folder_count):
     vocab_formatted = vocab.replace('; ', '_').replace(';', '_')  # Replace semicolons with underscores
     output_dir = f"{folder_count}_{vocab_formatted[:12]}"  # Incorporate folder count and formatted vocab string in output directory path
-    os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
     return [
         'python', 'zero_shot.py',
         '--byproduct_save', f"demo_saved/{output_dir}",
