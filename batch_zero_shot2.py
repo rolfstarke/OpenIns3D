@@ -20,8 +20,8 @@ def create_command(vocab, pcd_path):
     os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
     return [
         'python', 'zero_shot.py',
-        '--byproduct_save', output_dir,
-        '--result_save', output_dir,
+        '--byproduct_save', f"demo_saved/{output_dir}",
+        '--result_save', f"demo_results/{output_dir}",
         '--vocab', vocab,
         '--dataset', 'scannet',
         '--pcd_path', pcd_path
