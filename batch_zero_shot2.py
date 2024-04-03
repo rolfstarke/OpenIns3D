@@ -1,5 +1,6 @@
 import subprocess
 import os
+from itertools import cycle  # Importing cycle from itertools
 
 # Initialize directories
 input_dir = 'data/input'
@@ -51,4 +52,6 @@ for plyfile, vocab in zip(sorted(os.listdir(input_dir)), cycle(vocab_lists)):
 # Report success
 print("Successfully processed files:")
 for file in successful_files:
-    print(file)
+print(file)
+
+
