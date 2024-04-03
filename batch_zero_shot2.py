@@ -13,10 +13,13 @@ vocab_lists = [
     'cabinet; bed; chair; sofa; table; door; window; bookshelf; picture; counter; desk; curtain; refrigerator; showercurtain; toilet; sink; bathtub'
 ]
 
-# Function to create command with dynamic vocab and output paths
-def create_command(vocab, pcd_path):
+# Initialize folder count
+folder_count = 1
+
+# Function to create command with dynamic vocab, output paths, and folder count
+def create_command(vocab, pcd_path, folder_count):
     vocab_formatted = vocab.replace('; ', '_').replace(';', '_')  # Replace semicolons with underscores
-    output_dir = f"{vocab_formatted[:12]}"  # Use formatted vocab string in output directory path
+    output_dir = f"{folder_count}_{vocab_formatted[:12]}"  # Incorporate folder count and formatted vocab string in output directory path
     os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
     return [
         'python', 'zero_shot.py',
@@ -34,12 +37,13 @@ for vocab in vocab_lists:
     for plyfile in sorted(os.listdir(input_dir)):
         if plyfile.endswith('.ply'):
             full_ply_path = os.path.join(input_dir, plyfile)
-            print(f"Processing: {full_ply_path} with vocab: {vocab[:30]}...")
+            print(f"Processing: {full_ply_path} with vocab: {vocab[:30]}... in folder {folder_count}")
 
             try:
-                command = create_command(vocab, full_ply_path)
+                command = create_command(vocab, full_ply_path, folder_count)
                 subprocess.run(command, check=True)
                 successful_files.append((plyfile, vocab[:10]))  # Adjusted to track which vocab was used
+                folder_count += 1  # Increment folder count after each successful file processing
             except subprocess.CalledProcessError:
                 print(f"Failed to process: {full_ply_path}")
 
