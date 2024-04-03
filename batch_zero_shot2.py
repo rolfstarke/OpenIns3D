@@ -16,7 +16,7 @@ vocab_lists = [
 # Function to create command with dynamic vocab and output paths
 def create_command(vocab, pcd_path):
     vocab_formatted = vocab.replace('; ', '_').replace(';', '_')  # Replace semicolons with underscores
-    output_dir = f"data/results/{vocab_formatted}"  # Use formatted vocab string in output directory path
+    output_dir = f"{vocab_formatted[:12]}"  # Use formatted vocab string in output directory path
     os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
     return [
         'python', 'zero_shot.py',
