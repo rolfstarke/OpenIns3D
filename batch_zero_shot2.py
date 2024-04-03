@@ -1,13 +1,8 @@
 import subprocess
 import os
 
-# Initialize directories
+# Initialize input directory
 input_dir = 'data/input'
-output_base_dir = 'data/results'
-successful_files = []
-
-# Ensure the output base directory exists
-os.makedirs(output_base_dir, exist_ok=True)
 
 # Different vocab lists
 vocab_lists = [
@@ -19,7 +14,10 @@ vocab_lists = [
 ]
 
 # Function to create command with dynamic vocab and output paths
-def create_command(vocab, pcd_path, output_dir):
+def create_command(vocab, pcd_path):
+    vocab_formatted = vocab.replace('; ', '_').replace(';', '_')  # Replace semicolons with underscores
+    output_dir = f"data/results/{vocab_formatted}"  # Use formatted vocab string in output directory path
+    os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
     return [
         'python', 'zero_shot.py',
         '--byproduct_save', output_dir,
@@ -29,21 +27,19 @@ def create_command(vocab, pcd_path, output_dir):
         '--pcd_path', pcd_path
     ]
 
+successful_files = []
+
 # Process .ply files for each vocab list
 for vocab in vocab_lists:
-    folder_count = 1  # Reset folder count for each vocab list
     for plyfile in sorted(os.listdir(input_dir)):
         if plyfile.endswith('.ply'):
             full_ply_path = os.path.join(input_dir, plyfile)
-            output_dir = os.path.join(output_base_dir, f"{vocab[:10].replace(' ', '_')}_{folder_count}_{plyfile[:-4]}")  # Adjusted output directory to include vocab identifier and remove '.ply' from plyfile name
-            os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
-            print(f"Processing: {full_ply_path} with vocab: {vocab[:30]}... in {output_dir}")
+            print(f"Processing: {full_ply_path} with vocab: {vocab[:30]}...")
 
             try:
-                command = create_command(vocab, full_ply_path, output_dir)
+                command = create_command(vocab, full_ply_path)
                 subprocess.run(command, check=True)
                 successful_files.append((plyfile, vocab[:10]))  # Adjusted to track which vocab was used
-                folder_count += 1  # Increment folder count after successful processing
             except subprocess.CalledProcessError:
                 print(f"Failed to process: {full_ply_path}")
 
