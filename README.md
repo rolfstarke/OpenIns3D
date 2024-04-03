@@ -91,6 +91,7 @@ Install dependencies by running:
 
 ```bash
 conda create -n openins3d python=3.9
+conda env config vars set PATH=/usr/local/cuda-11.6/bin:$PATH -n openins3d
 conda activate openins3d
 
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
@@ -118,6 +119,8 @@ pip install -e .
 cd ..
 
 pip install torch_scatter gdown==v4.6.3 loguru open3d plyfile pyviz3d python-dotenv omegaconf==2.1.1 iopath==0.1.8
+
+#conda env config vars set LD_LIBRARY_PATH=/usr/local/cuda-11.6/lib64:$LD_LIBRARY_PATH -n openins3d
 ```
 
 
@@ -156,7 +159,7 @@ python zero_shot.py \
 
 # mattarport3d demo
 python zero_shot.py \
---pcd_path 'data/input/room1_model.ply' \
+--pcd_path 'data/input/room20_roofed.ply' \
 --vocab "chair; window; ceiling; picture; floor; lighting; table; cabinet; curtain; plant; shelving; sink; mirror; stairs;  counter; stool; bed; sofa; shower; toilet; TV; clothes; bathtub; blinds; board" \
 --dataset mattarport3d
 
@@ -166,10 +169,20 @@ python zero_shot.py \
 --vocab "floor; wall; beam; column; window; door; table; chair; sofa; bookcase; board" \
 --dataset s3dis
 
-# cuosmtized data 
+# scannet samlpe with own vocab, doesnt work
 python zero_shot.py \
---pcd_path 'data/input/room1_model.ply' \
---vocab "cabinet; bed; chair; sofa; table; door; window; bookshelf; picture; counter; desk; curtain; refrigerator; showercurtain; toilet; sink; bathtub" \
+--pcd_path 'demo/demo_scene/scannet/scannet_scene1.ply' \
+--vocab "cabinet; bed; chair; sofa; table; door; window; bookshelf; picture; counter; desk; curtain; refrigerator; showercurtain; toilet; sink; bathtub" 
+
+# scannet vocab with our own ply
+python zero_shot.py \
+--pcd_path 'data/input/room18.ply' \
+--vocab "cabinet; bed; chair; sofa; table; door; window; bookshelf; picture; counter; desk; curtain; refrigerator; showercurtain; toilet; sink; bathtub" 
+
+# scannet samlpe with own vocab
+python zero_shot.py \
+--pcd_path 'data/input/scannet_scene1.ply' \
+--vocab "desk chair; conference chair; desk; filing cabinets; ceiling lights; wall lights; dishwasher; fridge; freezer; lift; plant; extinguisher" 
 ```
 
 The dataset flag is only for adjusting the loading for different .ply files. For customizing the dataset, use 'scanent' as the default. Let us know if you encounter any issues! 📣
