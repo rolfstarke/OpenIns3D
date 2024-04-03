@@ -7,10 +7,11 @@ successful_files = []
 
 base_command = [
     'python', 'zero_shot.py',
-    '--byproduct_save', 'data/results',
-    '--result_save', 'data/results',
-    '--vocab', 'chair; window; ceiling; wall; floor; table; curtain; extinguisher; carpet',
-    #'--vocab', 'extinguisher,  wall',
+    #'--byproduct_save', 'data/results',
+    #'--result_save', 'data/results',
+    '--vocab', 'desk chair; conference chair; desk; filing cabinets; ceiling lights; wall lights; dishwasher; fridge; freezer; lift; plant; extinguisher',
+    #'--vocab', 'window; ceiling; wall; floor',
+    #'--vocab', 'concrete, blockwork; steel; chipboard; brickwork; plasterboard; glazing; render; glazing; carpet tiles; ceramic tiles; vinyl',
     '--dataset', 'scannet'
 ]
 
