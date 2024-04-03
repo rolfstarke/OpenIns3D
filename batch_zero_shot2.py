@@ -39,7 +39,7 @@ for plyfile, vocab in zip(sorted(os.listdir(input_dir)), cycle(vocab_lists)):
         full_ply_path = os.path.join(input_dir, plyfile)
         output_dir = os.path.join(output_base_dir, f"{folder_count}_{plyfile[:-4]}")  # Removing '.ply' from plyfile name for folder
         os.makedirs(output_dir, exist_ok=True)  # Ensure the output directory exists
-        print(f"Processing: {full_ply_path} with vocab: {vocab[:30]}... in {output_dir}")
+        print(f"Processing: {full_ply_path} with vocab: {vocab}... in {output_dir}")
 
         try:
             command = create_command(vocab, full_ply_path, output_dir)
